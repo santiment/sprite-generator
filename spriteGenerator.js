@@ -2,9 +2,8 @@ const Spritesmith = require('spritesmith')
 const fs = require('fs')
 const fsPromises = fs.promises
 const path = require('path')
+const config = require('./config')
 const { parseSlugFromFilename } = require('./utils')
-
-const DEST_DIR = `${__dirname}/tmp/`
 
 async function run (logos) {
   const filesToGenerate = logos.map(logo => { return logo.localFilepath })
@@ -19,8 +18,16 @@ async function generate (files) {
       } else {
         const coordinates = buildCoordinates(result)
 
-        fsPromises.writeFile(path.join(DEST_DIR, 'sprite.png'), result.image)
-        fsPromises.writeFile(path.join(DEST_DIR, 'coordinates.json'), JSON.stringify(coordinates))
+        fsPromises.writeFile(
+          path.join(config.workingDirDestination, 'sprite.png'),
+          result.image
+        )
+
+        fsPromises.writeFile(
+          path.join(config.workingDirDestination, 'coordinates.json'),
+          JSON.stringify(coordinates)
+        )
+
         resolve('done')
       }
     })

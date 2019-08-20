@@ -1,9 +1,10 @@
 const { parseFilenameFromUrl } = require('./utils')
 
 module.exports = class Logo {
-  constructor (slug, downloadUrl) {
+  constructor (slug, downloadUrl, localFilepath) {
     this.slug = slug
     this.downloadUrl = downloadUrl
+    this._localFilepath = localFilepath
   }
 
   filename () {

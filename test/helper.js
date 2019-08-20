@@ -6,10 +6,14 @@ const nock = require('nock')
 const fsExtra = require('fs-extra')
 const config = require('../config')
 
-beforeAll(() => nock.disableNetConnect())
-afterAll(() => nock.enableNetConnect())
+beforeAll(() => {
+  nock.disableNetConnect()
+  fsExtra.mkdirpSync(config.workingDirDestination, '0744')
+})
 
-afterEach(() => {
-  nock.cleanAll()
+afterAll(() => {
+  nock.enableNetConnect()
   fsExtra.removeSync(config.workingDirDestination)
 })
+
+afterEach(() => nock.cleanAll())

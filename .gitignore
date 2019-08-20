@@ -2,5 +2,6 @@ tmp/*
 !tmp/.gitkeep 
 
 test/tmp/*
-!test/tmp/.gitkeep
+!test/tmp/.gitkeep 
+
 node_modules/
