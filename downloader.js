@@ -1,16 +1,15 @@
 const fsExtra = require('fs-extra')
 const fs = require('fs')
 const fsPromises = fs.promises
+const config = require('./config')
 
 const path = require('path')
 const download = require('download')
 
-const DEST_DIR = `${__dirname}/tmp/`
-
 module.exports = class Downloader {
   constructor (logos) {
     this.logos = logos
-    this.destination = DEST_DIR + Math.random().toString(36).substring(7)
+    this.destination = config.workingDirDestination + Math.random().toString(36).substring(7)
     this._createDestinationDir()
   }
 
