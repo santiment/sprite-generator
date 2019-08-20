@@ -1,3 +1,4 @@
+require('./helper.js')
 const Logo = require('../logo.js')
 
 it('returns filename from url', () => {

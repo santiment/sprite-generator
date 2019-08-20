@@ -1,14 +1,10 @@
+require('./helper.js')
 const fs = require('fs')
 const nock = require('nock')
 const Logo = require('../logo')
 const Downloader = require('../downloader')
 
 describe('run', () => {
-  beforeAll(() => nock.disableNetConnect())
-  afterAll(() => nock.enableNetConnect())
-
-  afterEach(() => nock.cleanAll())
-
   it(`downloads file and returns it's path`, async () => {
     nock('https://example.com')
       .get('/logo64_ethereum.png')
@@ -24,7 +20,5 @@ describe('run', () => {
         slug: 'ethereum',
         localFilepath: expect.stringContaining('ethereum.png')
       }))
-
-    downloader.emptyWorkingDir()
   })
 })

@@ -1,13 +1,9 @@
+require('./helper.js')
 const nock = require('nock')
 const Logo = require('../logo')
 const urlFetcher = require('../urlFetcher')
 
 describe('run', () => {
-  beforeAll(() => nock.disableNetConnect())
-  afterAll(() => nock.enableNetConnect())
-
-  afterEach(() => nock.cleanAll())
-
   it('returns logos objects', async () => {
     nock('https://api-stage.santiment.net')
       .post('/graphql')
