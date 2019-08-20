@@ -13,7 +13,7 @@ beforeAll(() => {
 
 afterAll(() => {
   nock.enableNetConnect()
-  fsExtra.removeSync(config.workingDirDestination)
+  fsExtra.emptyDirSync(config.workingDirDestination)
 })
 
 afterEach(() => nock.cleanAll())

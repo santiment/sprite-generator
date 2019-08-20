@@ -1,5 +1,4 @@
 require('./helper.js')
-const fs = require('fs')
 const nock = require('nock')
 const Logo = require('../logo')
 const Downloader = require('../downloader')
@@ -8,7 +7,9 @@ describe('run', () => {
   it(`downloads file and returns it's path`, async () => {
     nock('https://example.com')
       .get('/logo64_ethereum.png')
-      .reply(200, fs.readFile('./data/logo64_ethereum.png'))
+      .replyWithFile(200, `${__dirname}/data/logo64_ethereum.png`, {
+        'Content-Type': 'image/png'
+      })
 
     const logo = new Logo('ethereum', 'https://example.com/logo64_ethereum.png')
     const downloader = new Downloader([logo])

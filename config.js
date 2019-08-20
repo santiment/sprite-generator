@@ -1,10 +1,10 @@
-const env = process.env.NODE_ENV || 'dev'
+const env = process.env.NODE_ENV || 'development'
 
 const production = {
   workingDirDestination: `${__dirname}/tmp/`
 }
 
-const dev = {
+const development = {
   workingDirDestination: `${__dirname}/tmp/`
 }
 
@@ -14,7 +14,7 @@ const test = {
 
 const config = {
   production,
-  dev,
+  development,
   test
 }
 
