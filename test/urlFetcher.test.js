@@ -2,10 +2,13 @@ require('./helper.js')
 const nock = require('nock')
 const Logo = require('../logo')
 const urlFetcher = require('../urlFetcher')
+const config = require('../config')
+
+const url = config.santimentUrl
 
 describe('run', () => {
   it('returns logos objects', async () => {
-    nock('https://api-stage.santiment.net')
+    nock(url)
       .post('/graphql')
       .reply(200, {
         data: {
@@ -36,7 +39,7 @@ describe('run', () => {
   })
 
   it('filters projects without logo', async () => {
-    nock('https://api-stage.santiment.net')
+    nock(url)
       .post('/graphql')
       .reply(200, {
         data: {
@@ -59,7 +62,7 @@ describe('run', () => {
   })
 
   it('throws an exception when no data is returned', async () => {
-    nock('https://api-stage.santiment.net')
+    nock(url)
       .post('/graphql')
       .reply(400, {})
 

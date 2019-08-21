@@ -1,7 +1,6 @@
 const { request } = require('graphql-request')
 const Logo = require('./logo')
-
-const SANTIMENT_GQL_URL = 'https://api-stage.santiment.net/graphql'
+const config = require('./config')
 
 async function run () {
   const query = `{
@@ -12,7 +11,7 @@ async function run () {
   }
   `
 
-  const data = await request(SANTIMENT_GQL_URL, query)
+  const data = await request(`${config.santimentUrl}/graphql`, query)
 
   return data
     .allProjects
