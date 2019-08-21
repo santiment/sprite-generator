@@ -1,7 +1,3 @@
 tmp/*
-!tmp/.gitkeep 
-
 test/tmp/*
-!test/tmp/.gitkeep 
-
 node_modules/
