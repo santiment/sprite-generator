@@ -31,6 +31,14 @@ it('generates an image sprite file', async () => {
   expect(exists).toBe(true)
 })
 
+it('generates a coordinates.css file', async () => {
+  const logo = new Logo(slug, logoUrl, imageFile)
+
+  await spriteGenerator.run([logo])
+  const exists = fs.existsSync(path.join(config.workingDirDestination, 'coordinates.css'))
+  expect(exists).toBe(true)
+})
+
 it('throws an error when image sprite generation has an error', async () => {
   const logo = new Logo(slug, logoUrl, `${__dirname}/data/not_found.png`)
 
