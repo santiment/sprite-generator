@@ -5,4 +5,4 @@ const runner = require('./runner')
 
 runner.run()
   .then(console.log('Done'))
-  .catch(error => console.error(error))
+  .catch(console.error)
