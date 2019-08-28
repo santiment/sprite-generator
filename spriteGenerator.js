@@ -4,6 +4,7 @@ const fsPromises = fs.promises
 const path = require('path')
 const config = require('./config')
 const { parseSlugFromFilename } = require('./utils')
+const { generateCSS } = require('./cssGenerator.js')
 
 async function run (logos) {
   const filesToGenerate = logos.map(logo => { return logo.localFilepath })
@@ -28,6 +29,10 @@ async function generate (files) {
           JSON.stringify(coordinates)
         )
 
+        fsPromises.writeFile(
+          path.join(config.workingDirDestination, 'coordinates.css'),
+          generateCSS(coordinates)
+        )
         resolve('done')
       }
     })
