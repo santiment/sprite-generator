@@ -1,11 +1,12 @@
 const config = require('./config.js')
+const size = '64px'
 
 function generateCSS (coordinates) {
   let result =
 `.project-icon {
   background-image: url('${config.santimentUrl}/sprite.png');
-  width: 64px;
-  height: 64px;
+  width: ${size};
+  height: ${size};
 }
 `
   for (const slug of Object.keys(coordinates)) {
