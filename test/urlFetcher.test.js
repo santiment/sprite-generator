@@ -14,15 +14,15 @@ describe('run', () => {
         data: {
           allProjects: [
             {
-              logo64Url: 'https://example.com/logo64_bitcoin.png',
+              logoUrl: 'https://example.com/logo64_bitcoin.png',
               slug: 'bitcoin'
             },
             {
-              logo64Url: 'https://example.com/logo64_ethereum.png',
+              logoUrl: 'https://example.com/logo64_ethereum.png',
               slug: 'ethereum'
             },
             {
-              logo64Url: 'https://example.com/logo64_santiment.png',
+              logoUrl: 'https://example.com/logo64_santiment.png',
               slug: 'santiment'
             }
           ]
@@ -45,11 +45,11 @@ describe('run', () => {
         data: {
           allProjects: [
             {
-              logo64Url: 'https://example.com/logo64_bitcoin.png',
+              logoUrl: 'https://example.com/logo64_bitcoin.png',
               slug: 'bitcoin'
             },
             {
-              logo64Url: null,
+              logoUrl: null,
               slug: 'ethereum'
             }
           ]
