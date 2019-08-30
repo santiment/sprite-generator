@@ -19,6 +19,12 @@ async function generate (files) {
       } else {
         const coordinates = buildCoordinates(result)
 
+        const filesPaths = [
+          path.join(config.workingDirDestination, 'sprite.png'),
+          path.join(config.workingDirDestination, 'coordinates.json'),
+          path.join(config.workingDirDestination, 'coordinates.json')
+        ]
+
         fsPromises.writeFile(
           path.join(config.workingDirDestination, 'sprite.png'),
           result.image
@@ -33,7 +39,7 @@ async function generate (files) {
           path.join(config.workingDirDestination, 'coordinates.css'),
           generateCSS(coordinates)
         )
-        resolve('done')
+        resolve(filesPaths)
       }
     })
   })

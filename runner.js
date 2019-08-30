@@ -15,13 +15,11 @@ async function run () {
   debug('done')
 
   debug('generating sprite image...')
-  await spriteGenerator.run(logos)
+  const spriteFiles = await spriteGenerator.run(logos)
   debug('done')
 
   debug('uploading to cloud...')
-  await uploader.run('sprite.png')
-  await uploader.run('coordinates.json')
-  await uploader.run('coordinates.css')
+  await uploader.run(spriteFiles)
   debug('done')
 
   debug('cleaning-up...')
