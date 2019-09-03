@@ -15,6 +15,21 @@ Generates image sprite from all crypto projects that can be found on [santiment]
 
     ./cli.js
 
+## Develop
+
+Create `.env` file with S3 credentials:
+
+```yaml
+AWS_S3_ACCESS_KEY_ID=key
+AWS_S3_SECRET_ACCESS_KEY=secret
+AWS_S3_BUCKET_NAME=bucket
+AWS_S3_BUCKET_REGION=region
+```
+
+Load the vars and enable debugging mode with:
+
+    DEBUG=runner node -r dotenv/config cli.js
+
 ## Test
 
     npm test
