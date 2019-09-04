@@ -1,10 +1,13 @@
 const fsExtra = require('fs-extra')
 const fs = require('fs')
 const fsPromises = fs.promises
+const path = require('path')
+const debug = require('debug')('runner')
+const PromisePool = require('es6-promise-pool')
+const download = require('download')
 const config = require('./config')
 
-const path = require('path')
-const download = require('download')
+const concurrency = config.downloaderConcurrency || 8
 
 module.exports = class Downloader {
   constructor (logos) {
@@ -24,7 +27,29 @@ module.exports = class Downloader {
   }
 
   async run () {
-    return Promise.all(this.logos.map(logo => this.download(logo)))
+    debug(`Downloading logos with concurrency of: ${concurrency} ...`)
+
+    const logos = [...this.logos]
+    const logoPromises = []
+    const self = this
+
+    const pool = new PromisePool(function * () {
+      for (const logo of logos) {
+        const promise = self.download(logo)
+        logoPromises.push(promise)
+        yield promise
+      }
+    }, concurrency)
+
+    const poolPromise = pool.start()
+
+    await poolPromise.then(() => {
+      debug('All logos downloaded.')
+    }, (error) => {
+      console.error(`Error occured while downloading logos. Message: ${error.message}`)
+    })
+
+    return Promise.all(logoPromises)
   }
 
   async download (logo) {
@@ -32,6 +57,7 @@ module.exports = class Downloader {
     const url = logo.downloadUrl
 
     try {
+      debug(`Downloading: ${logo.slug}`)
       const data = await download(url)
       const absolutePath = path.join(this.destination, filename)
       await fsPromises.writeFile(absolutePath, data)
