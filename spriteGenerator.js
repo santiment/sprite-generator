@@ -6,6 +6,10 @@ const config = require('./config')
 const { parseSlugFromFilename } = require('./utils')
 const { generateCSS } = require('./cssGenerator.js')
 
+const spriteImageFilename = 'sprite.png'
+const coordinatesCssFilename = 'coordinates.css'
+const coordinatesJsonFilename = 'coordinates.json'
+
 async function run (logos) {
   const filesToGenerate = logos.map(logo => { return logo.localFilepath })
   return generate(filesToGenerate)
@@ -19,21 +23,26 @@ async function generate (files) {
       } else {
         const coordinates = buildCoordinates(result)
 
-        fsPromises.writeFile(
-          path.join(config.workingDirDestination, 'sprite.png'),
-          result.image
-        )
+        const spriteFiles = {
+          image: {
+            localFilepath: path.join(config.workingDirDestination, spriteImageFilename),
+            filename: spriteImageFilename
+          },
+          css: {
+            localFilepath: path.join(config.workingDirDestination, coordinatesCssFilename),
+            filename: coordinatesCssFilename
+          },
+          json: {
+            localFilepath: path.join(config.workingDirDestination, coordinatesJsonFilename),
+            filename: coordinatesJsonFilename
+          }
+        }
 
-        fsPromises.writeFile(
-          path.join(config.workingDirDestination, 'coordinates.json'),
-          JSON.stringify(coordinates)
-        )
+        fsPromises.writeFile(spriteFiles.image.localFilepath, result.image)
+        fsPromises.writeFile(spriteFiles.json.localFilepath, JSON.stringify(coordinates))
+        fsPromises.writeFile(spriteFiles.css.localFilepath, generateCSS(coordinates))
 
-        fsPromises.writeFile(
-          path.join(config.workingDirDestination, 'coordinates.css'),
-          generateCSS(coordinates)
-        )
-        resolve('done')
+        resolve(Object.values(spriteFiles))
       }
     })
   })

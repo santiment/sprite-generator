@@ -8,7 +8,7 @@ const download = require('download')
 
 module.exports = class Downloader {
   constructor (logos) {
-    this.logos = logos
+    this.logos = logos.filter(logo => logo.filename !== null)
     this.destination = config.workingDirDestination + Math.random().toString(36).substring(7)
     this._createDestinationDir()
   }
@@ -28,7 +28,7 @@ module.exports = class Downloader {
   }
 
   async download (logo) {
-    const filename = logo.filename()
+    const filename = logo.filename
     const url = logo.downloadUrl
 
     try {

@@ -6,7 +6,7 @@ async function run () {
   const query = `{
     allProjects {
       slug
-      logo64Url
+      logoUrl
     }
   }
   `
@@ -15,8 +15,8 @@ async function run () {
 
   return data
     .allProjects
-    .filter(elem => elem.logo64Url !== null)
-    .map(elem => new Logo(elem.slug, elem.logo64Url))
+    .filter(elem => elem.logoUrl !== null)
+    .map(elem => new Logo(elem.slug, elem.logoUrl))
 }
 
 module.exports = {

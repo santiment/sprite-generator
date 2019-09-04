@@ -48,3 +48,23 @@ it('throws an error when image sprite generation has an error', async () => {
     expect(e).toBeTruthy()
   }
 })
+
+it('returns list of sprite png and coordinate files', async () => {
+  const logo = new Logo(slug, logoUrl, imageFile)
+  const result = await spriteGenerator.run([logo])
+
+  expect(result).toEqual([
+    {
+      filename: 'sprite.png',
+      localFilepath: path.join(config.workingDirDestination, 'sprite.png')
+    },
+    {
+      filename: 'coordinates.css',
+      localFilepath: path.join(config.workingDirDestination, 'coordinates.css')
+    },
+    {
+      filename: 'coordinates.json',
+      localFilepath: path.join(config.workingDirDestination, 'coordinates.json')
+    }
+  ])
+})

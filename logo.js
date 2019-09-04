@@ -5,11 +5,16 @@ module.exports = class Logo {
     this.slug = slug
     this.downloadUrl = downloadUrl
     this._localFilepath = localFilepath
+    this._filename = this.extractFilename()
   }
 
-  filename () {
+  extractFilename () {
     const rawFilename = parseFilenameFromUrl(this.downloadUrl)
-    return rawFilename.split('logo64_')[1]
+    return rawFilename.split('logo64_')[1] || null
+  }
+
+  get filename () {
+    return this._filename
   }
 
   set localFilepath (filepath) {
