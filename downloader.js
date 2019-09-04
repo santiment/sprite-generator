@@ -7,7 +7,7 @@ const PromisePool = require('es6-promise-pool')
 const download = require('download')
 const config = require('./config')
 
-const concurrency = config.downloaderConcurrency || 8
+const concurrency = config.downloaderConcurrency || 32
 
 module.exports = class Downloader {
   constructor (logos) {

@@ -8,6 +8,7 @@ const AWS_S3_BUCKET_REGION = process.env.AWS_S3_BUCKET_REGION
 const production = {
   workingDirDestination: `${__dirname}/tmp/`,
   santimentUrl: 'https://api.santiment.net',
+  downloaderConcurrency: 32,
   s3Key: AWS_S3_ACCESS_KEY_ID,
   s3Secret: AWS_S3_SECRET_ACCESS_KEY,
   s3Bucket: AWS_S3_BUCKET_NAME,
