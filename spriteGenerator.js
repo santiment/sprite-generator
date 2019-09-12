@@ -38,11 +38,13 @@ async function generate (files) {
           }
         }
 
-        fsPromises.writeFile(spriteFiles.image.localFilepath, result.image)
-        fsPromises.writeFile(spriteFiles.json.localFilepath, JSON.stringify(coordinates))
-        fsPromises.writeFile(spriteFiles.css.localFilepath, generateCSS(coordinates))
-
-        resolve(Object.values(spriteFiles))
+        Promise.all([
+          fsPromises.writeFile(spriteFiles.image.localFilepath, result.image),
+          fsPromises.writeFile(spriteFiles.json.localFilepath, JSON.stringify(coordinates)),
+          fsPromises.writeFile(spriteFiles.css.localFilepath, generateCSS(coordinates))
+        ]).then(() => {
+          resolve(Object.values(spriteFiles))
+        })
       }
     })
   })
