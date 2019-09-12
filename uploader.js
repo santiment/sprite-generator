@@ -1,4 +1,5 @@
 const fs = require('fs')
+const fsPromises = fs.promises
 const S3 = require('aws-sdk/clients/s3')
 const config = require('./config')
 
@@ -13,13 +14,18 @@ module.exports = class Uploader {
   }
 
   async _upload (file) {
-    return new Promise((resolve, reject) => {
-      try {
-        const params = { Bucket: config.s3Bucket, Key: file.filename, Body: fs.readFileSync(file.localFilepath) }
-        resolve(this.s3.putObject(params).promise())
-      } catch (error) {
-        reject(error)
-      }
-    })
+    const fileBody = await fsPromises.readFile(file.localFilepath)
+
+    const params = {
+      Bucket: config.s3Bucket,
+      Key: this._s3Path(file.filename),
+      Body: fileBody
+    }
+
+    await this.s3.putObject(params).promise()
+  }
+
+  _s3Path (filename) {
+    return `${config.s3Path}/${filename}`
   }
 }
