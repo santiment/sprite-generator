@@ -36,7 +36,8 @@ slaveTemplates.dockerTemplate { label ->
               sh "docker build \
                 -t ${awsRegistry}/sprite-generator:${env.BRANCH_NAME} \
                 -t ${awsRegistry}/sprite-generator:${scmVars.GIT_COMMIT} \
-                --build-arg GIT_HEAD=${gitHead} . \
+                --build-arg GIT_HEAD=${gitHead} \
+                -f docker/production/Dockerfile . \
                 --progress plain"
 
             }
