@@ -26,15 +26,18 @@ async function generate (files) {
         const spriteFiles = {
           image: {
             localFilepath: path.join(config.workingDirDestination, spriteImageFilename),
-            filename: spriteImageFilename
+            filename: spriteImageFilename,
+            contentType: 'image/png'
           },
           css: {
             localFilepath: path.join(config.workingDirDestination, coordinatesCssFilename),
-            filename: coordinatesCssFilename
+            filename: coordinatesCssFilename,
+            contentType: 'text/css'
           },
           json: {
             localFilepath: path.join(config.workingDirDestination, coordinatesJsonFilename),
-            filename: coordinatesJsonFilename
+            filename: coordinatesJsonFilename,
+            contentType: 'application/json'
           }
         }
 

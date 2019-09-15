@@ -19,7 +19,8 @@ module.exports = class Uploader {
     const params = {
       Bucket: config.s3Bucket,
       Key: this._s3Path(file.filename),
-      Body: fileBody
+      Body: fileBody,
+      ContentType: file.contentType
     }
 
     await this.s3.putObject(params).promise()

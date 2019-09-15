@@ -55,14 +55,17 @@ it('returns list of sprite png and coordinate files', async () => {
 
   expect(result).toEqual([
     {
+      contentType: 'image/png',
       filename: 'sprite.png',
       localFilepath: path.join(config.workingDirDestination, 'sprite.png')
     },
     {
+      contentType: 'text/css',
       filename: 'coordinates.css',
       localFilepath: path.join(config.workingDirDestination, 'coordinates.css')
     },
     {
+      contentType: 'application/json',
       filename: 'coordinates.json',
       localFilepath: path.join(config.workingDirDestination, 'coordinates.json')
     }
