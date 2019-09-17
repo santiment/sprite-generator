@@ -11,16 +11,32 @@ it('generates the css correctly', async () => {
   const testResult = generateCSS(testExample)
 
   const expectedResult =
-`.project-icon {
-  background-image: url('https://example.com/sprite.png');
+`
+.project-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-icon::before {
+  content: '';
+  display: block;
+  position: absolute;
   width: 64px;
   height: 64px;
+  background-image: 
+    url('https://example.com/sprite.png'),
+    url('https://example.com/sprite.png');
+  background-repeat: repeat, no-repeat;
+  background-position: 100% 100%;
+  transform: scale(var(--scale));
 }
-.project-icon-ethereum {
+.project-icon-ethereum::before {
   background-position: 0px 0px;
 }
-.project-icon-santiment {
-  background-position: 0px 64px;
+.project-icon-santiment::before {
+  background-position: 0px -64px;
 }
 `
   expect(testResult).toEqual(expectedResult)
