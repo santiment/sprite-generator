@@ -4,13 +4,12 @@ const S3 = require('aws-sdk/clients/s3')
 const config = require('./config')
 
 module.exports = class Uploader {
-  constructor (files) {
-    this.files = files
+  constructor () {
     this.s3 = new S3({ accessKeyId: config.s3Key, secretAccessKey: config.s3Secret, region: config.s3Region })
   }
 
-  async run () {
-    return Promise.all(this.files.map(file => this._upload(file)))
+  async run (files) {
+    return Promise.all(files.map(file => this._upload(file)))
   }
 
   async _upload (file) {

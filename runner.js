@@ -1,6 +1,7 @@
 const debug = require('debug')('runner')
 const urlFetcher = require('./urlFetcher')
 const Downloader = require('./downloader')
+const { defaultProjectLogo } = require('./defaultProjectLogo')
 const spriteGenerator = require('./spriteGenerator')
 const Uploader = require('./uploader')
 
@@ -18,10 +19,15 @@ async function run () {
   const spriteFiles = await spriteGenerator.run(logos)
   debug('Done generating sprite files.')
 
-  debug('Uploading...')
-  const uploader = new Uploader(spriteFiles)
-  await uploader.run()
-  debug('Done uploading.')
+  const uploader = new Uploader()
+
+  debug('Uploading sprite files...')
+  await uploader.run(spriteFiles)
+  debug('Done uploading sprite files.')
+
+  debug('Uploading default project logo...')
+  await uploader.run([defaultProjectLogo()])
+  debug('Done uploading default project logo.')
 
   debug('Cleaning-up temp files...')
   downloader.emptyWorkingDir()
