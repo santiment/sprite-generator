@@ -2,6 +2,7 @@ const fs = require('fs')
 const fsPromises = fs.promises
 const S3 = require('aws-sdk/clients/s3')
 const config = require('./config')
+const { s3FilePath } = require('./s3Helper')
 
 module.exports = class Uploader {
   constructor () {
@@ -17,15 +18,11 @@ module.exports = class Uploader {
 
     const params = {
       Bucket: config.s3Bucket,
-      Key: this._s3Path(file.filename),
+      Key: s3FilePath(file.filename),
       Body: fileBody,
       ContentType: file.contentType
     }
 
     await this.s3.putObject(params).promise()
-  }
-
-  _s3Path (filename) {
-    return `${config.s3Path}/${filename}`
   }
 }

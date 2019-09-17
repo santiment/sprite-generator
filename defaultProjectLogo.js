@@ -1,11 +1,10 @@
 const path = require('path')
+const config = require('./config')
 
 function defaultProjectLogo () {
-  const defaultProjectLogo = 'default_project_logo.png'
-
   return {
-    localFilepath: path.join(`${__dirname}/images/`, defaultProjectLogo),
-    filename: defaultProjectLogo,
+    localFilepath: path.join(`${__dirname}/images/`, config.defaultProjectLogoFilename),
+    filename: config.defaultProjectLogoFilename,
     contentType: 'image/png'
   }
 }

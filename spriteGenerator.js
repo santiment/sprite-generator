@@ -1,14 +1,9 @@
 const Spritesmith = require('spritesmith')
 const fs = require('fs')
 const fsPromises = fs.promises
-const path = require('path')
-const config = require('./config')
+const { spriteFiles } = require('./spriteFiles')
 const { parseSlugFromFilename } = require('./utils')
 const { generateCSS } = require('./cssGenerator.js')
-
-const spriteImageFilename = 'sprite.png'
-const coordinatesCssFilename = 'coordinates.css'
-const coordinatesJsonFilename = 'coordinates.json'
 
 async function run (logos) {
   const filesToGenerate = logos.map(logo => { return logo.localFilepath })
@@ -22,24 +17,6 @@ async function generate (files) {
         reject(err)
       } else {
         const coordinates = buildCoordinates(result)
-
-        const spriteFiles = {
-          image: {
-            localFilepath: path.join(config.workingDirDestination, spriteImageFilename),
-            filename: spriteImageFilename,
-            contentType: 'image/png'
-          },
-          css: {
-            localFilepath: path.join(config.workingDirDestination, coordinatesCssFilename),
-            filename: coordinatesCssFilename,
-            contentType: 'text/css'
-          },
-          json: {
-            localFilepath: path.join(config.workingDirDestination, coordinatesJsonFilename),
-            filename: coordinatesJsonFilename,
-            contentType: 'application/json'
-          }
-        }
 
         Promise.all([
           fsPromises.writeFile(spriteFiles.image.localFilepath, result.image),

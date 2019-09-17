@@ -1,4 +1,6 @@
-const config = require('./config.js')
+const { spriteFiles, defaultLogo } = require('./spriteFiles')
+const { s3Url } = require('./s3Helper')
+
 const size = '64px'
 
 function generateCSS (coordinates) {
@@ -18,8 +20,8 @@ function generateCSS (coordinates) {
   width: ${size};
   height: ${size};
   background-image: 
-    url('${config.santimentUrl}/sprite.png'),
-    url('${config.santimentUrl}/sprite.png');
+    url('${s3Url(spriteFiles.image.filename)}'),
+    url('${s3Url(defaultLogo.filename)}');
   background-repeat: repeat, no-repeat;
   background-position: 100% 100%;
   transform: scale(var(--scale));

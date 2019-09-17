@@ -26,8 +26,8 @@ it('generates the css correctly', async () => {
   width: 64px;
   height: 64px;
   background-image: 
-    url('https://example.com/sprite.png'),
-    url('https://example.com/sprite.png');
+    url('https://s3Bucket.s3.s3Region.amazonaws.com/s3Path/sprite.png'),
+    url('https://s3Bucket.s3.s3Region.amazonaws.com/s3Path/default_project_logo.png');
   background-repeat: repeat, no-repeat;
   background-position: 100% 100%;
   transform: scale(var(--scale));

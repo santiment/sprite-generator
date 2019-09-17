@@ -3,7 +3,7 @@ const env = process.env.NODE_ENV || 'development'
 const AWS_S3_ACCESS_KEY_ID = process.env.AWS_S3_ACCESS_KEY_ID
 const AWS_S3_SECRET_ACCESS_KEY = process.env.AWS_S3_SECRET_ACCESS_KEY
 const AWS_S3_BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME
-const AWS_S3_BUCKET_REGION = process.env.AWS_S3_BUCKET_REGION
+const AWS_S3_BUCKET_REGION = process.env.AWS_S3_BUCKET_REGION || 'eu-central-1'
 const AWS_S3_PATH = process.env.AWS_S3_PATH || 'sprite'
 
 const production = {
@@ -29,7 +29,10 @@ const development = {
 
 const test = {
   workingDirDestination: `${__dirname}/test/tmp/`,
-  santimentUrl: 'https://example.com'
+  santimentUrl: 'https://example.com',
+  s3Path: 's3Path',
+  s3Bucket: 's3Bucket',
+  s3Region: 's3Region'
 }
 
 const config = {
