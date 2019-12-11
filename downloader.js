@@ -2,7 +2,7 @@ const fsExtra = require('fs-extra')
 const fs = require('fs')
 const fsPromises = fs.promises
 const path = require('path')
-const debug = require('debug')('runner')
+const { logger } = require('./logger')
 const PromisePool = require('es6-promise-pool')
 const download = require('download')
 const config = require('./config')
@@ -27,7 +27,7 @@ module.exports = class Downloader {
   }
 
   async run () {
-    debug(`Downloading logos with concurrency of: ${concurrency} ...`)
+    logger.info(`Downloading logos with concurrency of: ${concurrency} ...`)
 
     const logos = [...this.logos]
     const logoPromises = []
@@ -44,7 +44,7 @@ module.exports = class Downloader {
     const poolPromise = pool.start()
 
     await poolPromise.then(() => {
-      debug('All logos downloaded.')
+      logger.info('All logos downloaded.')
     }, (error) => {
       console.error(`Error occured while downloading logos. Message: ${error.message}`)
     })
@@ -57,7 +57,7 @@ module.exports = class Downloader {
     const url = logo.downloadUrl
 
     try {
-      debug(`Downloading: ${logo.slug} from ${url}`)
+      logger.info(`Downloading: ${logo.slug} from ${url}`)
       const data = await download(url)
       const absolutePath = path.join(this.destination, filename)
       await fsPromises.writeFile(absolutePath, data)
