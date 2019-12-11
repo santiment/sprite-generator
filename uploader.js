@@ -23,6 +23,7 @@ module.exports = class Uploader {
       ContentType: file.contentType
     }
 
-    await this.s3.putObject(params).promise()
+    const response = await this.s3.putObject(params).promise()
+    return { file: file.filename, response: response }
   }
 }

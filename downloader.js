@@ -57,7 +57,7 @@ module.exports = class Downloader {
     const url = logo.downloadUrl
 
     try {
-      debug(`Downloading: ${logo.slug}`)
+      debug(`Downloading: ${logo.slug} from ${url}`)
       const data = await download(url)
       const absolutePath = path.join(this.destination, filename)
       await fsPromises.writeFile(absolutePath, data)
