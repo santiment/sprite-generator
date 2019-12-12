@@ -32,8 +32,6 @@ async function run () {
   logger.info('Cleaning-up temp files...')
   downloader.emptyWorkingDir()
   logger.info('Done cleaning-up')
-
-  logger.info('Finished')
 }
 
 module.exports = {
