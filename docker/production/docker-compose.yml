@@ -1,8 +1,0 @@
-version: "3"
-services:
-  sprite-generator:
-    build:
-      context: ../../
-      dockerfile: docker/production/Dockerfile
-    environment:
-      NODE_ENV: production
