@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-console.log('Generating image sprite ...')
 const runner = require('./runner')
+const { logger } = require('./logger')
 
 runner.run()
-  .then(() => console.log('Finished succesfully'))
+  .then(() => logger.info('Finished.'))
   .catch(console.error.bind(console))

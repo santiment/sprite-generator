@@ -26,9 +26,9 @@ AWS_S3_BUCKET_NAME=bucket
 AWS_S3_BUCKET_REGION=region
 ```
 
-Load the vars and enable debugging mode with:
+Load the vars:
 
-    DEBUG=runner node -r dotenv/config cli.js
+    node -r dotenv/config cli.js
 
 ## Test
 
