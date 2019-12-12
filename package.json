@@ -17,6 +17,7 @@
     "es6-promise-pool": "^2.5.0",
     "fs-extra": "^8.1",
     "graphql-request": "^1.8",
+    "jimp": "^0.9.3",
     "node-json-logger": "0.0.10",
     "spritesmith": "^3.3"
   },
