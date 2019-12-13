@@ -4,16 +4,10 @@ const fs = require('fs')
 const fsPromises = fs.promises
 const config = require('../config')
 const spriteGenerator = require('../spriteGenerator.js')
-const Logo = require('../logo.js')
-
-const slug = 'ethereum'
-const logoUrl = 'https://example.com/logo64_ethereum.png'
 const imageFile = `${__dirname}/data/logo64_ethereum.png`
 
 it('generates a coordinates.json file', async () => {
-  const logo = new Logo(slug, logoUrl, imageFile)
-
-  await spriteGenerator.run([logo])
+  await spriteGenerator.run([imageFile])
   const coordinatesFile = await fsPromises.readFile(
     path.join(config.workingDirDestination, 'coordinates.json')
   )
@@ -24,34 +18,27 @@ it('generates a coordinates.json file', async () => {
 })
 
 it('generates an image sprite file', async () => {
-  const logo = new Logo(slug, logoUrl, imageFile)
-
-  await spriteGenerator.run([logo])
+  await spriteGenerator.run([imageFile])
   const exists = fs.existsSync(path.join(config.workingDirDestination, 'sprite.png'))
   expect(exists).toBe(true)
 })
 
 it('generates a coordinates.css file', async () => {
-  const logo = new Logo(slug, logoUrl, imageFile)
-
-  await spriteGenerator.run([logo])
+  await spriteGenerator.run([imageFile])
   const exists = fs.existsSync(path.join(config.workingDirDestination, 'coordinates.css'))
   expect(exists).toBe(true)
 })
 
 it('throws an error when image sprite generation has an error', async () => {
-  const logo = new Logo(slug, logoUrl, `${__dirname}/data/not_found.png`)
-
   try {
-    await spriteGenerator.run([logo])
+    await spriteGenerator.run([`${__dirname}/data/not_found.png`])
   } catch (e) {
     expect(e).toBeTruthy()
   }
 })
 
 it('returns list of sprite png and coordinate files', async () => {
-  const logo = new Logo(slug, logoUrl, imageFile)
-  const result = await spriteGenerator.run([logo])
+  const result = await spriteGenerator.run([imageFile])
 
   expect(result).toEqual([
     {
