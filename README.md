@@ -1,5 +1,7 @@
 # sprite-generator
 
+**NOTE Won't be used, the resulting image is too big - ~9MB without resize and compression for 1.5k projects.**
+
 Generates image sprite from all crypto projects that can be found on [santiment](https://api.santiment.net/graphiql?variables=&query=%7B%0A%20%20allProjects%20%7B%0A%20%20%20%20slug%0A%20%20%20%20logo64Url%0A%20%20%7D%0A%7D%0A).
 
 ## Prerequisites
