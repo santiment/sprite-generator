@@ -6,6 +6,7 @@ const imageOptimizer = require('./imageOptimizer')
 const spriteGenerator = require('./spriteGenerator')
 const Uploader = require('./uploader')
 const { logger } = require('./logger')
+const config = require('./config')
 
 async function run () {
   logger.info('Fetching logo urls...')
@@ -20,11 +21,11 @@ async function run () {
   const logosLocalPaths = logos.map(logo => { return logo.localFilepath })
 
   logger.info(`Resizing ${logosLocalPaths.length} images...`)
-  await imageResizer.run(logosLocalPaths, 40, 40)
+  await imageResizer.run(logosLocalPaths, config.imageSize, config.imageSize)
   logger.info('Done resizing images.')
 
   logger.info(`Optimizing ${logosLocalPaths.length} images...`)
-  await imageOptimizer.run(logosLocalPaths, 90)
+  await imageOptimizer.run(logosLocalPaths, config.imageQuality)
   logger.info('Done optimizing images.')
 
   logger.info('Generating sprite files...')

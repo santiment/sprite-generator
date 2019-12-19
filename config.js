@@ -14,7 +14,9 @@ const production = {
   s3Key: AWS_S3_ACCESS_KEY_ID,
   s3Secret: AWS_S3_SECRET_ACCESS_KEY,
   s3Bucket: AWS_S3_BUCKET_NAME,
-  s3Region: AWS_S3_BUCKET_REGION
+  s3Region: AWS_S3_BUCKET_REGION,
+  imageSize: 40,
+  imageQuality: 90
 }
 
 const development = {
@@ -24,7 +26,9 @@ const development = {
   s3Key: AWS_S3_ACCESS_KEY_ID,
   s3Secret: AWS_S3_SECRET_ACCESS_KEY,
   s3Bucket: AWS_S3_BUCKET_NAME,
-  s3Region: AWS_S3_BUCKET_REGION
+  s3Region: AWS_S3_BUCKET_REGION,
+  imageSize: 40,
+  imageQuality: 90
 }
 
 const test = {
