@@ -1,9 +1,12 @@
 const urlFetcher = require('./urlFetcher')
 const Downloader = require('./downloader')
 const { defaultLogo } = require('./spriteFiles')
+const imageResizer = require('./imageResizer')
+const imageOptimizer = require('./imageOptimizer')
 const spriteGenerator = require('./spriteGenerator')
 const Uploader = require('./uploader')
 const { logger } = require('./logger')
+const config = require('./config')
 
 async function run () {
   logger.info('Fetching logo urls...')
@@ -15,8 +18,18 @@ async function run () {
   logos = await downloader.run()
   logger.info(`Done downloading ${logos.length} logos.`)
 
+  const logosLocalPaths = logos.map(logo => { return logo.localFilepath })
+
+  logger.info(`Resizing ${logosLocalPaths.length} images...`)
+  await imageResizer.run(logosLocalPaths, config.imageSize, config.imageSize)
+  logger.info('Done resizing images.')
+
+  logger.info(`Optimizing ${logosLocalPaths.length} images...`)
+  await imageOptimizer.run(logosLocalPaths, config.imageQuality)
+  logger.info('Done optimizing images.')
+
   logger.info('Generating sprite files...')
-  const generatedFiles = await spriteGenerator.run(logos)
+  const generatedFiles = await spriteGenerator.run(logosLocalPaths)
   logger.info(`Done generating sprite files: ${JSON.stringify(generatedFiles)}.`)
 
   const uploader = new Uploader()

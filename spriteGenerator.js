@@ -5,12 +5,7 @@ const { spriteFiles } = require('./spriteFiles')
 const { parseSlugFromFilename } = require('./utils')
 const { generateCSS } = require('./cssGenerator.js')
 
-async function run (logos) {
-  const filesToGenerate = logos.map(logo => { return logo.localFilepath })
-  return generate(filesToGenerate)
-}
-
-async function generate (files) {
+async function run (files) {
   return new Promise((resolve, reject) => {
     Spritesmith.run({ src: files }, function handleResult (err, result) {
       if (err) {
